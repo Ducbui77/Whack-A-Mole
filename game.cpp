@@ -166,6 +166,9 @@ static void gameOver()
     gameState = GAME_OVER;
     clearMoles();
 
+    // Bỏ các nút còn tồn trong hàng đợi để không vô tình khởi động lại ngay
+    xQueueReset(buttonQueue);
+
     if (score > highScore)
     {
         highScore = score;
