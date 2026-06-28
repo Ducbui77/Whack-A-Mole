@@ -13,15 +13,12 @@ enum GameState
 
 void gameInit();
 
-void gameStart();
-
 void gameReset();
 
 void gameUpdate();
 
-// khi task Input phát hiện nút được nhấn
-void gameButtonPressed(uint8_t button);
-
+// taskInput gửi nút vừa nhấn vào hàng đợi; gameUpdate sẽ xử lý
+void gamePostButton(uint8_t button);
 
 GameState gameGetState();
 
