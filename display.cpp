@@ -41,7 +41,7 @@ void displayClear()
     oldTime = -1;
 }
 
-void displayShowWelcome()
+void displayShowWelcome(int highScore)
 {
     displayClear();
 
@@ -49,7 +49,9 @@ void displayShowWelcome()
     lcd.print(" WHACK A MOLE ");
 
     lcd.setCursor(0,1);
-    lcd.print("Press Any Key");
+    lcd.print("Hi:");
+    lcd.print(highScore);
+    lcd.print(" Press Key");
 }
 
 void displayShowCountdown(uint8_t sec)
@@ -130,7 +132,7 @@ void displayShowGame(
     }
 }
 
-void displayShowGameOver(int score)
+void displayShowGameOver(int score, int highScore)
 {
     displayClear();
 
@@ -139,6 +141,8 @@ void displayShowGameOver(int score)
 
     lcd.setCursor(0,1);
     lcd.print("Score:");
-
     lcd.print(score);
+
+    lcd.print(" Hi:");
+    lcd.print(highScore);
 }

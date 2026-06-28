@@ -2,67 +2,96 @@
 
 #include "pins.h"
 
-void buzzerInit()
-{
-    pinMode(BUZZER_PIN, OUTPUT);
+#include "freertos/FreeRTOS.h"
+#include "freertos/queue.h"
 
-    digitalWrite(BUZZER_PIN, LOW);
-}
+static QueueHandle_t soundQueue;
 
-void buzzerOn()
+static void buzzerOn()
 {
     digitalWrite(BUZZER_PIN, HIGH);
 }
 
-void buzzerOff()
+static void buzzerOff()
 {
     digitalWrite(BUZZER_PIN, LOW);
 }
 
-void buzzerBeep(uint16_t duration)
+static void buzzerBeep(uint16_t duration)
 {
     buzzerOn();
-
     delay(duration);
-
     buzzerOff();
 }
 
-void buzzerStart()
+static void playStart()
 {
     buzzerBeep(80);
-
     delay(60);
-
     buzzerBeep(80);
 }
 
-void buzzerHit()
+static void playHit()
 {
     buzzerBeep(40);
 }
 
-void buzzerMiss()
+static void playMiss()
 {
     buzzerBeep(250);
 }
 
-void buzzerTimeout()
+static void playTimeout()
 {
     buzzerBeep(150);
-
     delay(50);
-
     buzzerBeep(150);
 }
 
-
-void buzzerGameOver()
+static void playGameOver()
 {
-    for(int i=0;i<3;i++)
+    for (int i = 0; i < 3; i++)
     {
         buzzerBeep(250);
-
         delay(100);
+    }
+}
+
+static void playTick()
+{
+    buzzerBeep(30);
+}
+
+void buzzerInit()
+{
+    pinMode(BUZZER_PIN, OUTPUT);
+    digitalWrite(BUZZER_PIN, LOW);
+
+    soundQueue = xQueueCreate(8, sizeof(SoundEffect));
+}
+
+void soundPlay(SoundEffect effect)
+{
+    xQueueSend(soundQueue, &effect, 0);
+}
+
+void soundTask(void *pvParameters)
+{
+    SoundEffect effect;
+
+    while (true)
+    {
+        if (xQueueReceive(soundQueue, &effect, portMAX_DELAY) == pdTRUE)
+        {
+            switch (effect)
+            {
+            case SND_START:    playStart();    break;
+            case SND_HIT:      playHit();      break;
+            case SND_MISS:     playMiss();     break;
+            case SND_TIMEOUT:  playTimeout();  break;
+            case SND_GAMEOVER: playGameOver(); break;
+            case SND_TICK:     playTick();     break;
+            }
+        }
     }
 }

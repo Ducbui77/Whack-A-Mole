@@ -32,6 +32,18 @@
 
 #define LEVEL_SCORE        10
 
+// số giây đếm ngược trước khi vào game
+
+#define COUNTDOWN_SEC        3
+
+// từ level này trở lên có 2 mole cùng lúc
+
+#define MOLE_LEVEL_2         3
+
+// số mole tối đa cùng lúc
+
+#define MOLE_MAX             2
+
 /*task period */
 
 #define INPUT_TASK_DELAY     10

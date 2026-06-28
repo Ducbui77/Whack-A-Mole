@@ -6,7 +6,7 @@
 void displayInit();
 
 // Màn hình chờ
-void displayShowWelcome();
+void displayShowWelcome(int highScore);
 
 // Màn hình đếm ngược
 void displayShowCountdown(uint8_t sec);
@@ -19,7 +19,7 @@ void displayShowGame(
     int remainTime);
 
 // Màn hình game over
-void displayShowGameOver(int score);
+void displayShowGameOver(int score, int highScore);
 
 void displayClear();
 

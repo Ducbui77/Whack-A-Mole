@@ -1,5 +1,19 @@
 # Whack-A-Mole
 
+Trò chơi "đập chuột chũi" trên ESP32 (6 LED + 6 nút + buzzer + LCD I2C), chạy trên
+FreeRTOS với 3 task giao tiếp qua hàng đợi.
+
+## Tính năng
+
+- 6 mole (LED) với độ khó tăng dần theo level (mole sáng nhanh hơn).
+- Đếm ngược 3-2-1 trước khi vào game.
+- Đa mole: từ level 3 có 2 mole sáng cùng lúc.
+- Buzzer bất đồng bộ (task riêng) — không làm trễ vòng game.
+- Lưu điểm cao nhất vào flash (NVS), còn sau khi tắt nguồn.
+- Hệ thống mạng/điểm/level/đồng hồ hiển thị trên LCD 16x2.
+
+> 📄 Chi tiết kiến trúc, mô hình đa nhiệm và API: [docs/TECHNICAL.md](docs/TECHNICAL.md)
+
 ## Kiến trúc mạch ESP32
 
 **Buttons:**

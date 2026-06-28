@@ -36,14 +36,6 @@ void buttonInit()
     }
 }
 
-bool buttonIsPressed(uint8_t id)
-{
-    if (id >= NUM_BUTTON)
-        return false;
-
-    return digitalRead(buttonPin[id]) == LOW;
-}
-
 int buttonRead()
 {
     unsigned long currentTime = millis();

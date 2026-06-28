@@ -20,14 +20,4 @@ void gameUpdate();
 // taskInput gửi nút vừa nhấn vào hàng đợi; gameUpdate sẽ xử lý
 void gamePostButton(uint8_t button);
 
-GameState gameGetState();
-
-int gameGetScore();
-
-int gameGetLife();
-
-int gameGetLevel();
-
-int gameGetRemainTime();
-
 #endif

@@ -44,6 +44,15 @@ void setup()
         1,
         NULL,
         1);
+
+    xTaskCreatePinnedToCore(
+        soundTask,
+        "TaskSound",
+        2048,
+        NULL,
+        1,
+        NULL,
+        1);
 }
 
 void loop()
